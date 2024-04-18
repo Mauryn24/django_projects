@@ -1,11 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Base</title>
+    <style>
+        /* Applying basic styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        h1 {
+            color: #0066cc;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
 </head>
+
 <body>
     <h1 style="color: brown;">Hello World</h1>
+    
+    <h1>Progskill Heading</h1>
+    <p>This is a paragraph with some text. Progskill is a learning platform</p>
+    <dl>
+        <dt>Coffee</dt>
+        <dd>- black hot drink</dd>
+        <dt>Milk</dt>
+        <dd>- white cold drink</dd>
+    </dl>
+    <form action="/submit" method="post">
+        <!-- Form content goes here -->
+        <div>
+            <input type="text" name="username" placeholder="Enter your username">
+        </div>
+        <div>
+            <input type="password" name="password" placeholder="Enter your password">
+        </div>
+        <div>
+            <input type="checkbox" name="subscribe" id="subscribe">
+            <label for="subscribe">Subscribe to the Progskill newsletter</label>
+        </div>
+        <div>
+            <input type="radio" name="gender" value="male" id="male">
+            <label for="male">Male</label>
+            <input type="radio" name="gender" value="female" id="female">
+            <label for="female">Female</label>
+        </div>
+        <div>
+            <select name="country">
+                <option value="USA">United States</option>
+                <option value="UK">United Kingdom</option>
+                <option value="CA">Canada</option>
+            </select>
+        </div>
+        <div>
+            <textarea name="message" rows="4" cols="50" placeholder="Enter your message"></textarea>
+        </div>
+        <div>
+            <input type="submit" value="Submit">
+        </div>
+        <div>
+            <input type="reset" value="Reset">
+
+        </div>
+       
+        
+        
+
+    </form>
 </body>
+
 </html>
