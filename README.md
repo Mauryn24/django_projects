@@ -23,10 +23,10 @@ Replace `<repository_url>` with the URL of your Git repository.
 ### 2. Create a Virtual Environment
 
 ```bash
-python -m venv env
+python -m venv myenv
 ```
 
-This command will create a new virtual environment named `env` in the project directory.
+This command will create a new virtual environment named `myenv` in the project directory.
 
 ### 3. Activate the Virtual Environment
 
@@ -39,10 +39,10 @@ On Windows:
 On Unix/Linux/macOS:
 
 ```bash
-source env/bin/activate
+source myenv/bin/activate
 ```
 
-This command will activate the virtual environment. You should see `(env)` in your command prompt.
+This command will activate the virtual environment. You should see `(myenv)` in your command prompt.
 
 ### 4. Install Django and Dependencies
 
