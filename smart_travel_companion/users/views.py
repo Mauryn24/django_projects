@@ -1,6 +1,7 @@
 # users/views.py
+from django.contrib.auth.forms import UserCreationForm
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 
@@ -20,3 +21,14 @@ def user_profile(request, username=None):
             return render(request, 'users/profile.html', {'profile': profile})
         except User.DoesNotExist:
             return HttpResponse('User not found', status=404)
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # Redirect to login page after successful registration
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/register.html', {'form': form})
