@@ -17,7 +17,7 @@ Including another URLconf
 
 # smart_travel_companion/urls.py
 
-from django.contrib import admin
+from django.contrib import admin, views as auth_views
 from django.urls import path, include  # Import include here
 
 urlpatterns = [
@@ -25,5 +25,8 @@ urlpatterns = [
     path('', include('trips.urls')),  # Include trips app URLs
     path('trips/', include('trips.urls')),  # Include trips app URLs
     path('users/', include('users.urls')),  # Include users app URLs
+     path('register/', auth_views.RegistrationView.as_view(), name='register'),
+    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]
 
