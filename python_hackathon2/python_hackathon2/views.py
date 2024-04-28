@@ -59,6 +59,12 @@ def home(request):
     # Handle the case where data5 is empty or not a list
     error_message = 'No country data available or invalid response format'
   # Pass the country information or error message to the template
- 
+  
+  response6 = requests.get('https://api.openbrewerydb.org/v1/breweries/random')
+  data6 = response6.json()
+  id = data6[0]['id']
+  name = data6[0]['name']
+  website_url = data6[0]['website_url']
+  
 
-  return render(request, 'home.html', {'result': result, 'result2': result2, 'result3': result3, 'setup': setup, 'punchline': punchline, 'cc': cc, 'sn': sn, 'spv': spv, 'error_message': error_message})
+  return render(request, 'home.html', {'result': result, 'result2': result2, 'result3': result3, 'setup': setup, 'punchline': punchline, 'cc': cc, 'sn': sn, 'spv': spv, 'error_message': error_message, 'id': id, 'name': name, 'website_url': website_url})
