@@ -39,6 +39,23 @@
             <h3>Punchline</h3>
             <div class="text-dark fw-normal">{{ punchline }}</div> <!-- Bootstrap text style: normal -->
         </div>
+        <div class="container py-5">
+            <h2 class="text-center text-primary mb-5">Welcome to economic_data of countries</h2>
+            {% if error_message %}
+                <h3>Error Message</h3>
+                <div class="text-dark fst-normal"> {{ error_message}}</div>
+            
+            {% else %}
+                <h3>Country Code</h3>
+                <div class="text-dark fst-normal">{{ cc }}</div>
+
+                <h3>Short Name</h3>
+                <div class="text-dark fst-normal">{{ sn }}</div>
+
+                <h3>SNA Price Valuation</h3>
+                <div class="text-dark fw-normal">{{ spv }}</div>
+            {% endif %}
+        </div>
     </div>
 </div>
 
