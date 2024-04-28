@@ -1,0 +1,22 @@
+/* styles.css */
+
+/* Customizing heading colors */
+h1, h2 {
+    color: #007bff; /* Bright blue */
+}
+
+/* Customizing background color */
+body {
+    background-color: #f8f9fa; /* Light gray */
+}
+
+/* Customizing button colors */
+.btn-primary {
+    background-color: #28a745; /* Green */
+    border-color: #28a745;
+}
+
+.btn-primary:hover {
+    background-color: #218838; /* Darker green */
+    border-color: #218838;
+}

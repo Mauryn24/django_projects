@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,16 +9,34 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link href="{% static 'styles.css' %}" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Python Hackathon API Building</h1>
+    <div class="container">
+        <h1>Python Hackathon API Building</h1>
 
-    {{result}}
-
-    <h1>Random Pet</h1>
-    {{result2}}
-    <img src={{result2}} alt="random pet" />
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Result 1</h2>
+                <div>{{ result }}</div>
+            </div>
+            <div class="col-md-6">
+                <h2>A Random Pet</h2>
+                <div>{{ result2 }}</div>
+                <img src="{{ result2 }}" alt="Random Pet" class="img-fluid">
+            </div>
+        </div>
+        <div>
+            <h2>Emojis</h2>
+            <div>{{ result3 }}</div>
+        </div>
+        <div>
+            <h2>Randon coffee</h2>
+            {{ result4 }}
+        </div>
+    </div>
 
     <!-- Bootstrap and Popper JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
