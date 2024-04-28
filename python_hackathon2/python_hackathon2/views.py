@@ -75,7 +75,18 @@ def home(request):
   else:
     # Handle errors if the request fails
     coffee_image_url = None
-        
+  
+  try:
+    # Make a GET request to fetch a single to-do item
+    response = requests.get('https://jsonplaceholder.typicode.com/todos/1')
+    response.raise_for_status()  # Raise an exception for HTTP errors (4xx or 5xx)
+
+    # Extract the to-do item data from the response JSON
+    todo_data = response.json()
+  except requests.RequestException as e:
+    # Handle errors
+    print(f"Error fetching to-do item: {e}")
+    todo_data = None
   
 
-  return render(request, 'home.html', {'result': result, 'result2': result2, 'result3': result3, 'setup': setup, 'punchline': punchline, 'cc': cc, 'sn': sn, 'spv': spv, 'error_message': error_message, 'id': id, 'name': name, 'website_url': website_url, 'coffee_image_url': coffee_image_url})
+  return render(request, 'home.html', {'result': result, 'result2': result2, 'result3': result3, 'setup': setup, 'punchline': punchline, 'cc': cc, 'sn': sn, 'spv': spv, 'error_message': error_message, 'id': id, 'name': name, 'website_url': website_url, 'coffee_image_url': coffee_image_url, 'todo_data': todo_data})
