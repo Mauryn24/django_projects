@@ -66,5 +66,16 @@ def home(request):
   name = data6[0]['name']
   website_url = data6[0]['website_url']
   
+  # Make a GET request to fetch the random coffee image URL
+  response7 = requests.get('https://coffee.alexflipnote.dev/random.json')
+    
+  if response7.status_code == 200:
+    # Extract the image URL from the response JSON
+    coffee_image_url = response7.json().get('file')
+  else:
+    # Handle errors if the request fails
+    coffee_image_url = None
+        
+  
 
-  return render(request, 'home.html', {'result': result, 'result2': result2, 'result3': result3, 'setup': setup, 'punchline': punchline, 'cc': cc, 'sn': sn, 'spv': spv, 'error_message': error_message, 'id': id, 'name': name, 'website_url': website_url})
+  return render(request, 'home.html', {'result': result, 'result2': result2, 'result3': result3, 'setup': setup, 'punchline': punchline, 'cc': cc, 'sn': sn, 'spv': spv, 'error_message': error_message, 'id': id, 'name': name, 'website_url': website_url, 'coffee_image_url': coffee_image_url})

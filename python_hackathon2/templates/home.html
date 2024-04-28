@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,8 +53,14 @@
         .brewery-info {
             margin-top: 1rem;
         }
+
+        .coffee-image {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
+
 <body class="bg-light">
     <div class="container py-5">
         <h1 class="text-center text-primary mb-5">Python Hackathon API Building</h1>
@@ -114,6 +121,24 @@
             </div>
         </div>
 
+        <div class="container py-5">
+            <h1 class="text-center mb-5">Random Coffee Image</h1>
+
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            {% if coffee_image_url %}
+                            <img src="{{ coffee_image_url }}" class="coffee-image" alt="Random Coffee">
+                            {% else %}
+                            <p>Failed to fetch coffee image.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- Bootstrap and Popper JS -->
@@ -124,4 +149,5 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
 </body>
+
 </html>
