@@ -23,16 +23,10 @@ def home(request):
   # response4 = requests.get('https://coffee.alexflipnote.dev/random')
   # data4 = response4.json()
   # result4 = data4['file']
-
-  try:
-    response4 = requests.get('https://emojihub.yurace.pro/api/random')
-    response4.raise_for_status()  # Raise an exception for HTTP errors
-    data4 = response.json()
-    result4 = data.get('emoji', 'No emoji found')  # Get the emoji from the response data
-  except requests.RequestException as e:
-    result4 = f'Error: {e}'  # Handle request exceptions
-  except ValueError as e:
-      result4 = f'Error decoding JSON: {e}'  # Handle JSON decode errors
+  response4 = requests.get('https://official-joke-api.appspot.com/random_joke')
+  data4 = response4.json()
+  setup = data4['setup']
+  punchline = data4['punchline']
 
   
-  return render(request, 'home.html', {'result': result, 'result2': result2, 'result3': result3, 'result4': result4})
+  return render(request, 'home.html', {'result': result, 'result2': result2, 'result3': result3, 'setup': setup, 'punchline': punchline})
