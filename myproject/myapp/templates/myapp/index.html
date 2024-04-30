@@ -1,0 +1,27 @@
+{% load static %} <!-- Load static files such as images -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experimental Results</title>
+</head>
+<body>
+    <!-- Heading for carbon footprint data -->
+    <h1>Carbon Footprint:</h1> 
+    <ul>
+        <!-- Iterate through carbon footprint data -->
+        {% for name, value in carbon_footprint_data %}
+        <!-- Display name and corresponding value -->
+        <li>{{ name }}: {{ value }}</li> 
+        {% endfor %}
+    </ul>
+    
+    <!-- Display images for simulation and deployment results -->
+    <!-- Static image for simulation results -->
+    <img src="{% static 'simulation_results.png' %}" alt="Simulation Results">
+    <!-- Static image for deployment results -->
+    <img src="{% static 'deployment_results.png' %}" alt="Deployment Results">
+</body>
+</html>
