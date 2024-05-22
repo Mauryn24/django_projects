@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe Finder</title>
+</head>
+<body>
+    <h1>Welcome to Recipe Finder</h1>
+    <form action="{% url 'search' %}" method="get">
+        <input type="text" name="q" placeholder="Search for recipes...">
+        <button type="submit">Search</button>
+    </form>
+    <h2>Categories</h2>
+    <ul>
+        {% for category in categories %}
+            <li><a href="{% url 'category_detail' category.id %}">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

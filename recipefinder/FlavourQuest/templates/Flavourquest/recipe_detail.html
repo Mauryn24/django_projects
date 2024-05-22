@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ recipe.title }}</title>
+</head>
+<body>
+    <h1>{{ recipe.title }}</h1>
+    <p>{{ recipe.instructions }}</p>
+    <h2>Ingredients</h2>
+    <p>{{ recipe.ingredients }}</p>
+    <h2>Comments</h2>
+    {% if comments %}
+        <ul>
+        {% for comment in comments %}
+            <li>{{ comment.user.username }}: {{ comment.content }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No comments yet.</p>
+    {% endif %}
+    <form action="{% url 'add_comment' recipe.id %}" method="post">
+        {% csrf_token %}
+        <textarea name="content" placeholder="Add a comment..."></textarea>
+        <button type="submit">Add Comment</button>
+    </form>
+    <form action="{% url 'add_to_cart' recipe.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Add to Cart</button>
+    </form>
+    <form action="{% url 'add_to_favorites' recipe.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Add to Favorites</button>
+    </form>
+    <form action="{% url 'like_recipe' recipe.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">{% if user in recipe.likes.all %}Unlike{% else %}Like{% endif %}</button>
+    </form>
+    <a href="{% url 'index' %}">Back to Home</a>
+</body>
+</html>
