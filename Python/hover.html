@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hover property</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background:
+            linear-gradient(45deg,
+            #ffbd18, #ffffff);
+            border-radius: 10px;
+            transition: opacity 0.7s ease;
+            cursor: pointer;
+        }
+
+        .main:hover>:not(:hover) {
+            opacity: 0.2;
+        }
+
+        .main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: auto;
+            gap: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+</body>
+</html>
