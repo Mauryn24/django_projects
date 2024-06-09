@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+    <title>GBV Support App</title>
+</head>
+<body>
+    <h1>Welcome to the GBV Support App</h1>
+    <p><a href="{% url 'resources' %}">Information Resources</a></p>
+    <p><a href="{% url 'emergency_contacts' %}">Emergency Contacts</a></p>
+    <p><a href="{% url 'get_location' %}">Find Nearby Shelters</a></p>
+    <form action="{% url 'send_alert' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="location" placeholder="Enter your location">
+        <button type="submit">Send Alert</button>
+    </form>
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>

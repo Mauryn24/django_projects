@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+    <title>Find Nearby Shelters</title>
+</head>
+<body>
+    <h1>Enter Your Location</h1>
+    <form action="{% url 'find_shelters' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="address" placeholder="Enter your address">
+        <button type="submit">Find Shelters</button>
+    </form>
+    <p><a href="{% url 'home' %}">Back to Home</a></p>
+</body>
+</html>
