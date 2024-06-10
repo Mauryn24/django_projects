@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Safeguard Registration</title>
+</head>
+<body>
+    <h1>Register an Incident</h1>
+    <p>You can choose to remain anonymous if you feel unsafe disclosing your identity.</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Report</button>
+    </form>
+</body>
+</html>
