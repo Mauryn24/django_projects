@@ -11,6 +11,7 @@ def home(request):
         url = f'https://newsapi.org/v2/top-headlines?country={country}&apiKey={API_KEY}'
         response = requests.get(url)
         data = response.json()
+        # get all articles
         articles = data['articles']
     else:
         url = f'https://newsapi.org/v2/top-headlines?category={category}&apiKey={API_KEY}'
