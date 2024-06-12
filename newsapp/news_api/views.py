@@ -1,6 +1,7 @@
 # news_api/views.py
 
 import hashlib
+from django.db import IntegrityError
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -11,6 +12,8 @@ from django.contrib.auth.decorators import login_required
 import requests
 from django.views.decorators.csrf import csrf_protect
 from .models import Like, Bookmark, Article
+from django.utils.dateparse import parse_datetime
+
 
 API_KEY = '0a47c0fd4f15448481f3fb46f8eecae3'
 
@@ -31,10 +34,20 @@ def home(request):
     data = response.json()
     articles = data['articles']
 
+    # Generate unique IDs for articles if they don't have one
     for article in articles:
-        article['id'] = hashlib.md5(article['url'].encode('utf-8')).hexdigest()
+        article_id = hashlib.md5(article['url'].encode('utf-8')).hexdigest()
+        article['id'] = article_id
 
-    paginator = Paginator(articles, 5)
+        # Handle missing published_at
+        published_at = article.get('publishedAt')
+        if published_at:
+            article['published_at'] = parse_datetime(published_at)
+        else:
+            article['published_at'] = None
+
+    # Pagination
+    paginator = Paginator(articles, 5)  # Show 5 articles per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -85,14 +98,54 @@ def user_logout(request):
 
 @login_required
 def like_article(request, article_id):
-    article, created = Article.objects.get_or_create(id=article_id)
-    Like.objects.create(user=request.user, article=article)
+    article_data = None
+    for article in request.session.get('articles', []):
+        if article['id'] == article_id:
+            article_data = article
+            break
+
+    if article_data:
+        article, created = Article.objects.get_or_create(
+            id=article_id,
+            defaults={
+                'title': article_data['title'],
+                'description': article_data.get('description', ''),
+                'url': article_data['url'],
+                'urlToImage': article_data.get('urlToImage', ''),
+                'published_at': article_data.get('published_at'),
+                'author': article_data.get('author', ''),
+            }
+        )
+        Like.objects.create(user=request.user, article=article)
+    
     return redirect('home')
 
 @login_required
 def bookmark_article(request, article_id):
-    article, created = Article.objects.get_or_create(id=article_id)
-    Bookmark.objects.create(user=request.user, article=article)
+    article_data = None
+    for article in request.session.get('articles', []):
+        if article['id'] == article_id:
+            article_data = article
+            break
+
+    if article_data:
+        try:
+            article, created = Article.objects.get_or_create(
+                id=article_id,
+                defaults={
+                    'title': article_data['title'],
+                    'description': article_data.get('description', ''),
+                    'url': article_data['url'],
+                    'urlToImage': article_data.get('urlToImage', ''),
+                    'published_at': article_data.get('published_at'),
+                    'author': article_data.get('author', ''),
+                }
+            )
+            Bookmark.objects.create(user=request.user, article=article)
+        except IntegrityError:
+            # Handle if the article already exists
+            pass
+    
     return redirect('home')
 
 @login_required

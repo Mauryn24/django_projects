@@ -11,7 +11,7 @@ class Article(models.Model):
     description = models.TextField()
     url = models.URLField()
     url_to_image = models.URLField(null=True, blank=True)
-    published_at = models.DateTimeField()
+    published_at = models.DateTimeField(null=True, blank=True)  # Allow null values
     source_name = models.CharField(max_length=100)
 
     def __str__(self):
