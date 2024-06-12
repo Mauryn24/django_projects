@@ -1,0 +1,24 @@
+{% extends 'news_api/base.html' %}
+
+{% block title %}Bookmarked Articles{% endblock %}
+
+{% block content %}
+    <h1 class="text-center my-4">Bookmarked Articles</h1>
+    <div class="container">
+        {% for bookmark in bookmarks %}
+            <div class="card mb-3">
+                <img src="{{ bookmark.article.urlToImage }}" class="card-img-top" alt="Image not available">
+                <div class="card-body">
+                    <h5 class="card-title">{{ bookmark.article.title }}</h5>
+                    <p class="card-text">{{ bookmark.article.description }}</p>
+                    <p class="card-text"><small class="text-muted">By {{ bookmark.article.author }} | {{ bookmark.article.publishedAt }}</small></p>
+                    <a href="{{ bookmark.article.url }}" target="_blank" class="btn btn-success">Read More</a>
+                    <form action="{% url 'remove_bookmark_article' bookmark.article.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-warning">Remove Bookmark</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
